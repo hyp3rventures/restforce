@@ -20,7 +20,11 @@ module Restforce
     end
 
     def message
-      "#{body['errorCode']}: #{body['message']}"
+      if body['error'].nil?
+        "#{body['errorCode']}: #{body['message']}"
+      else
+        "#{body['error']['exceptionCode']}: #{body['error']['exceptionMessage']}"
+      end
     end
 
     def body
